@@ -1,1 +1,12 @@
-/* TODO Add site wide styles */
+@font-face {
+	font-family: "Campton", sans-serif;
+	src: url("../src/assets/fonts/CamptonMedium.otf");
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
