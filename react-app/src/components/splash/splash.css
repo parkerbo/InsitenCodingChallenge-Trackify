@@ -1,0 +1,19 @@
+@media only screen and (max-width: 600px) {
+    #splash-heading {
+        font-size: 2.5rem !important;
+    }
+}
+.splash-main {
+    background: linear-gradient(to bottom, #010133, #0F1048 );
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#splash-heading {
+    color: white;
+    margin: 100px 20px 20px 20px;
+    font-size: 3.5rem;
+    text-align: center;
+    font-family: "Campton-Light", sans-serif;
+}
