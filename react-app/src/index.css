@@ -1,1 +1,24 @@
-/* TODO Add site wide styles */
+@font-face {
+	font-family: "Campton";
+	src: url("../src/assets/fonts/CamptonMedium.otf") format("opentype");
+}
+@font-face {
+	font-family: "Campton-Light";
+	src: url("../src/assets/fonts/CamptonLight.otf") format("opentype");
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+    position: relative;
+    margin: 0;
+
+}

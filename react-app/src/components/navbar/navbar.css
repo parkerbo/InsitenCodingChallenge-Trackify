@@ -1,0 +1,106 @@
+@media only screen and (max-width: 600px) {
+	.nav-bar-button {
+		width: 120px !important;
+	}
+}
+
+.nav-bar {
+	padding: 0px 60px;
+    height: 70px;
+	display: flex;
+	align-items: center;
+    background-color: white;
+	font-family: "Campton", sans-serif;
+    position:sticky;
+    top:0;
+}
+
+.nav-bar-links {
+	display: flex;
+	margin-left: auto;
+	align-items: center;
+}
+.nav-bar-links button {
+	margin-right: 10px;
+}
+.nav-bar-links button:last-child {
+	margin-right: 0;
+}
+
+.nav-bar-button {
+	background-color: white;
+	display: inline-flex;
+	border: 1px solid black;
+	color: black;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	width: 100px;
+	padding: 0 1em;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 0.4rem;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.1em;
+	transition: border 0.1s ease-in-out;
+}
+
+.nav-bar-button:hover {
+	border: 2px solid #010133;
+}
+
+.nav-bar-mobile-menu {
+	display: flex;
+	margin-left: auto;
+	align-items: center;
+}
+
+#nav-bar-try {
+	background-image: linear-gradient(90deg, #010133, #0f1048);
+	display: inline-flex;
+	border: 1px transparent;
+	color: white;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 0.4rem;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.1em;
+}
+
+#nav-bar-try:hover {
+	background-image: linear-gradient(90deg, #18187e, #1d1f98);
+}
+
+#nav-bar-menu-icon {
+	cursor: pointer;
+	position: relative;
+}
+
+#nav-bar-menu-icon svg {
+	vertical-align: bottom;
+}
+
+#nav-bar-menu-items {
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	position: absolute;
+	background-color: white;
+	right: 0;
+    width: 190px;
+    border-radius: 3px;
+	margin-top: 22px;
+}
+
+#nav-bar-menu-items button {
+	margin-bottom: 10px;
+}
