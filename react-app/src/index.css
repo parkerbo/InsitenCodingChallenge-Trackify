@@ -11,6 +11,14 @@
 	box-sizing: border-box;
 }
 
-body {
+html, body {
 	margin: 0;
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+    position: relative;
+    margin: 0;
+
 }

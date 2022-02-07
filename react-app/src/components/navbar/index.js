@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import LogoutButton from "../auth/LogoutButton";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import TrackifyLogo from "../../assets/images/TrackifyLogo.svg";
@@ -8,16 +9,29 @@ import useWindowDimensions from "../WindowHook";
 
 const NavBar = () => {
 	const { height, width } = useWindowDimensions();
+	const history = useHistory();
 	const [menu, setMenu] = useState(false);
 	return (
 		<nav className="nav-bar">
 			<div>
-				<img src={TrackifyLogo} alt="Logo of the trackify app" />
+				<NavLink to="/">
+					<img src={TrackifyLogo} alt="Logo of the trackify app" />
+				</NavLink>{" "}
 			</div>
 			{width > 600 && (
 				<div className="nav-bar-links">
-					<button className="nav-bar-button">Log In</button>
-					<button className="nav-bar-button">Sign Up</button>
+					<button
+						className="nav-bar-button"
+						onClick={() => history.push("/login")}
+					>
+						Log In
+					</button>
+					<button
+						className="nav-bar-button"
+						onClick={() => history.push("/sign-up")}
+					>
+						Sign Up
+					</button>
 					<button id="nav-bar-try">Give it a try</button>
 				</div>
 			)}
@@ -29,10 +43,13 @@ const NavBar = () => {
 						</button>
 					)}
 
-					<div id="nav-bar-menu-icon" onClick={(e) => {
-            e.preventDefault();
-            setMenu(!menu)
-          } }>
+					<div
+						id="nav-bar-menu-icon"
+						onClick={(e) => {
+							e.preventDefault();
+							setMenu(!menu);
+						}}
+					>
 						{menu ? (
 							<AiOutlineClose size="1.6rem" />
 						) : (
@@ -40,8 +57,18 @@ const NavBar = () => {
 						)}
 						{menu && (
 							<div id="nav-bar-menu-items">
-								<button className="nav-bar-button">Log In</button>
-								<button className="nav-bar-button">Sign Up</button>
+								<button
+									className="nav-bar-button"
+									onClick={() => history.push("/login")}
+								>
+									Log In
+								</button>
+								<button
+									className="nav-bar-button"
+									onClick={() => history.push("/sign-up")}
+								>
+									Sign Up
+								</button>
 							</div>
 						)}
 					</div>

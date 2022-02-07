@@ -5,10 +5,14 @@
 }
 
 .nav-bar {
-	margin: 15px 30px;
+	padding: 0px 60px;
+    height: 70px;
 	display: flex;
 	align-items: center;
+    background-color: white;
 	font-family: "Campton", sans-serif;
+    position:sticky;
+    top:0;
 }
 
 .nav-bar-links {
@@ -26,8 +30,8 @@
 .nav-bar-button {
 	background-color: white;
 	display: inline-flex;
-	border: 1px solid #6c52fe;
-	color: #6c52fe;
+	border: 1px solid black;
+	color: black;
 	overflow: hidden;
 	align-items: center;
 	justify-content: center;
@@ -44,7 +48,7 @@
 }
 
 .nav-bar-button:hover {
-	border: 2px solid #6c52fe;
+	border: 2px solid #010133;
 }
 
 .nav-bar-mobile-menu {
@@ -54,9 +58,9 @@
 }
 
 #nav-bar-try {
-	background-image: linear-gradient(90deg, #6b53ff, #6b53ff);
+	background-image: linear-gradient(90deg, #010133, #0f1048);
 	display: inline-flex;
-	border: 1px solid #6c52fe;
+	border: 1px transparent;
 	color: white;
 	overflow: hidden;
 	align-items: center;
@@ -72,7 +76,7 @@
 }
 
 #nav-bar-try:hover {
-	background-image: linear-gradient(90deg, #6b53ff, #8d49f7, #6b53ff);
+	background-image: linear-gradient(90deg, #18187e, #1d1f98);
 }
 
 #nav-bar-menu-icon {
@@ -94,7 +98,7 @@
 	right: 0;
     width: 190px;
     border-radius: 3px;
-	margin-top: 25px;
+	margin-top: 22px;
 }
 
 #nav-bar-menu-items button {
