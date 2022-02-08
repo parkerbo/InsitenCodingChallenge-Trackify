@@ -1,8 +1,8 @@
 import "./target.css";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getTarget } from "../../store/target";
+import { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getTarget, saveNotes } from "../../store/target";
 import LoadingScreen from "../loading";
 import CompanyLogo from "../company_logo";
 import { IoGlobeSharp } from "react-icons/io5";
@@ -10,23 +10,64 @@ import { MdInfo } from "react-icons/md";
 import { RiContactsBookFill } from "react-icons/ri";
 import { AiOutlineStock } from "react-icons/ai";
 import { HiPencilAlt } from "react-icons/hi";
+import { useModal } from "../../context/modal_context";
+import EditTargetForm from "./edit_target";
 
 const Target = () => {
+	const sessionTarget = useSelector((state) => state.target);
+	const { showEditTargetForm, setShowEditTargetForm } = useModal();
 	const { targetId } = useParams();
+	const didMount = useRef(false);
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 	const [target, setTarget] = useState("");
+	const [notes, setNotes] = useState("");
 	const [contacts, setContacts] = useState("");
 	const [financials, setFinancials] = useState("");
+	const [saveState, setSaveState] = useState("");
 
 	useEffect(async () => {
+		if (!sessionTarget || targetId != target.id) {
 		const res = await dispatch(getTarget(targetId));
-		setTarget(res.target);
+        setTarget(res.target);
+		setNotes(res.target.notes);
 		setContacts(res.contacts);
 		setFinancials(res.financials);
-		setLoaded(true);
-		console.log(res);
-	}, [dispatch, targetId]);
+        setLoaded(true);
+		} else {
+		setTarget(sessionTarget.target);
+		setNotes(sessionTarget.target.notes);
+		setContacts(sessionTarget.contacts);
+		setFinancials(sessionTarget.financials);
+        setLoaded(true)
+        }
+
+	}, [dispatch, targetId, sessionTarget]);
+
+	const updateNotes = (e) => {
+		setSaveState("Saving...");
+		setNotes(e.target.value);
+	};
+	useEffect(() => {
+		const delayDebounceFn = setTimeout(async () => {
+			if (didMount.current) {
+				const payload = {
+					targetId: targetId,
+					notes: notes,
+				};
+
+				await dispatch(saveNotes(payload));
+				setSaveState("All changes saved");
+				setTimeout(() => {
+					setSaveState("");
+				}, 1000);
+			} else {
+				didMount.current = true;
+			}
+		}, 1000);
+
+		return () => clearTimeout(delayDebounceFn);
+	}, [notes]);
 
 	if (!loaded) {
 		return null;
@@ -36,6 +77,7 @@ const Target = () => {
 	}
 	return (
 		<div className="target-body">
+			<EditTargetForm target={target} />
 			<div className="target-main">
 				<div className="target-main-intro">
 					<CompanyLogo name={target.company_name} />
@@ -63,6 +105,11 @@ const Target = () => {
 								<MdInfo />
 								Company Info
 							</h2>
+							<div className="widget-edit">
+								<button onClick={() => setShowEditTargetForm(true)}>
+									Edit
+								</button>
+							</div>
 						</div>
 						<div className="widget-details">
 							<div className="widget-row">
@@ -113,6 +160,15 @@ const Target = () => {
 								<HiPencilAlt />
 								Notes
 							</h2>
+							<div className="widget-edit">{saveState}</div>
+						</div>
+						<div className="widget-details">
+							<textarea
+								placeholder="Jot down your notes here..."
+								required
+								value={notes}
+								onChange={updateNotes}
+							></textarea>
 						</div>
 					</div>
 				</div>

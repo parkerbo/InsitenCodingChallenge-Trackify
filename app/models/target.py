@@ -28,6 +28,7 @@ class Target(db.Model):
             'phone': self.phone,
             'website': self.website,
             'status': self.status,
+            'notes': self.notes,
             'created_at' : self.created_at,
             'updated_at': self.updated_at
         }
