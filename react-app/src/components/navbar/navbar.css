@@ -12,6 +12,7 @@
     background-color: white;
 	font-family: "Campton", sans-serif;
     position:sticky;
+    box-shadow: 0 1px 4px 0px #999;
     top:0;
 }
 
