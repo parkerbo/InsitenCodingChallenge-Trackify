@@ -1,0 +1,29 @@
+.contact-list > .widget-row {
+	padding: 5px 20px;
+    display: flex;
+    align-items: center;
+}
+.contact-list > .widget-row:hover {
+	background-color: #F9F8F8;
+	cursor: pointer;
+}
+.contact-widget-details{
+    overflow-y:scroll;
+}
+.contact-details{
+    margin-top: 10px;
+}
+.contact-details > .widget-row{
+    padding: 0px 20px 0px 50px;
+}
+.contact-options{
+    margin-left: auto;
+}
+#contact-row-title{
+    font-family: "Campton" , sans-serif;
+}
+#contact-row-value{
+    margin-left: 10px;
+    color:#666666;
+    font-family: "Campton-Light", sans-serif;
+}

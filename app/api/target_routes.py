@@ -15,7 +15,7 @@ def validation_errors_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages.append(f'{error}')
     return errorMessages
 
 @target_routes.route('/<int:id>')
@@ -28,7 +28,7 @@ def get_target(id):
     contacts = {}
     contacts_query = Contact.query.filter(Contact.target_id == id).all()
     if contacts_query:
-        contacts = [contact.to_dict() for contact in contacts_query]
+        contacts = {contact.id: contact.to_dict() for contact in contacts_query}
     result['contacts'] = contacts
 
     financials = {}

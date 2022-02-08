@@ -12,10 +12,13 @@ import { AiOutlineStock } from "react-icons/ai";
 import { HiPencilAlt } from "react-icons/hi";
 import { useModal } from "../../context/modal_context";
 import EditTargetForm from "./edit_target";
+import Contact from "../contact";
+import EditContactForm from "../contact/edit_contact";
+import AddContact from "../contact/add_contact";
 
 const Target = () => {
 	const sessionTarget = useSelector((state) => state.target);
-	const { showEditTargetForm, setShowEditTargetForm } = useModal();
+	const { showEditTargetForm, setShowEditTargetForm, setShowAddContactForm } = useModal();
 	const { targetId } = useParams();
 	const didMount = useRef(false);
 	const [loaded, setLoaded] = useState(false);
@@ -26,6 +29,9 @@ const Target = () => {
 	const [financials, setFinancials] = useState("");
 	const [saveState, setSaveState] = useState("");
 
+    // This function retrieves the target info from the redux store and sets the associated variables
+    // It calls the backend only if the sessionTarget hasn't been retrieved, otherwise it looks for changes to the store
+    // and updates accordingly
 	useEffect(async () => {
 		if (!sessionTarget || targetId != target.id) {
 		const res = await dispatch(getTarget(targetId));
@@ -44,6 +50,7 @@ const Target = () => {
 
 	}, [dispatch, targetId, sessionTarget]);
 
+    // Lines 51 through 74 are for the autosave feature in the notes section
 	const updateNotes = (e) => {
 		setSaveState("Saving...");
 		setNotes(e.target.value);
@@ -118,19 +125,19 @@ const Target = () => {
 							</div>
 							<div className="widget-row">
 								<div id="widget-row-title">Current Status</div>
-								<div id="widget-row-value">{target.status}</div>
+								<div id="widget-row-value">{target.status || "---"}</div>
 							</div>
 							<div className="widget-row">
 								<div id="widget-row-title">Location</div>
-								<div id="widget-row-value">{target.location}</div>
+								<div id="widget-row-value">{target.location || "---"}</div>
 							</div>
 							<div className="widget-row">
 								<div id="widget-row-title">Phone</div>
-								<div id="widget-row-value">{target.phone}</div>
+								<div id="widget-row-value">{target.phone || "---"}</div>
 							</div>
 							<div className="widget-row">
 								<div id="widget-row-title">Website</div>
-								<div id="widget-row-value">{target.website}</div>
+								<div id="widget-row-value">{target.website || "---"}</div>
 							</div>
 							<div className="widget-row">
 								<div id="widget-row-title">Last Updated</div>
@@ -144,6 +151,18 @@ const Target = () => {
 								<RiContactsBookFill />
 								Contacts
 							</h2>
+							<div className="widget-edit">
+								<button onClick={() => setShowAddContactForm(true)}>
+									Add New Contact
+								</button>
+							</div>
+							<AddContact targetId={target.id} />
+						</div>
+						<div className="contact-widget-details">
+							<EditContactForm />
+							{Object.keys(contacts).map((key) => (
+								<Contact key={contacts[key].id} contact={contacts[key]} />
+							))}
 						</div>
 					</div>
 					<div className="half-widget" style={{ marginRight: "auto" }}>
