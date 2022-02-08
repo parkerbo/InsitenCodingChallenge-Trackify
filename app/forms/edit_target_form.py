@@ -3,7 +3,7 @@ from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired, ValidationError, URL, Optional
 
 def check_phone(form, field):
-    # Checking if username is already in use
+    # Checking if valid phone
     phone = field.data
     if phone.isupper() or phone.islower():
         raise ValidationError('Please enter a valid phone number')
