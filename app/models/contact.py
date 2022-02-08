@@ -12,7 +12,10 @@ class Contact(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
+    contacts = db.relationship("Target", backref='target_contacts')
+
     def to_dict(self):
+
         return {
             'id': self.id,
             'target_id': self.target_id,

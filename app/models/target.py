@@ -7,6 +7,7 @@ class Target(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     company_name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
+    notes = db.Column(db.Text)
     location = db.Column(db.Text)
     phone = db.Column(db.String(15))
     website = db.Column(db.Text)
@@ -14,9 +15,8 @@ class Target(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
-    contacts = db.relationship("Contact", backref='target_contacts')
+    targets = db.relationship("User", backref='user_targets')
 
-    financials = db.relationship("Financial", backref='target_financials')
 
     def to_dict(self):
         return {
@@ -28,6 +28,7 @@ class Target(db.Model):
             'phone': self.phone,
             'website': self.website,
             'status': self.status,
+            'notes': self.notes,
             'created_at' : self.created_at,
             'updated_at': self.updated_at
         }

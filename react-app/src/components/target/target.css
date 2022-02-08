@@ -1,0 +1,123 @@
+.target-main{
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    font-family: "Campton", sans-serif;
+    padding: 25px 10% 0px 10%;
+
+}
+.target-body{
+    background-color: #F3F2EE;
+    min-height: 100%;
+    padding-bottom: 50px;
+}
+.target-main-intro{
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+.target-intro-details{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.target-intro-details h1{
+    font-size: 3em;
+    margin: 10px 0px 0px;
+}
+.target-intro-details h3{
+    margin: 0;
+}
+.target-intro-details h5{
+    margin: 5px 0px 0px 2px;
+}
+.target-intro-details svg {
+    margin-bottom: 2px;
+    vertical-align: bottom;
+}
+.target-intro-details a {
+    margin-left: 5px;
+    color: black;
+    font-size: 1.2em;
+}
+
+.target-intro-details p {
+    font-family: "Campton-Light", sans-serif;
+    margin-right: 100px;
+}
+
+.target-detailed-view{
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.half-widget{
+    width: 49%;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.widget-header{
+    padding: 5px 20px;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+.half-widget h2{
+ margin-bottom: 0;
+}
+
+.half-widget svg{
+   margin-bottom: -4px;
+   margin-right: 5px;
+}
+
+.widget-details{
+    padding: 10px 20px;
+    min-height: 100%;
+    overflow-y:scroll;
+    font-family: "Campton-Light", sans-serif;
+}
+
+.widget-row{
+    display: flex;
+    height: 40px;
+}
+#widget-row-title{
+    font-family: "Campton" , sans-serif;
+}
+#widget-row-value{
+    margin-left: auto;
+    color:#666666;
+}
+.widget-content {
+    display: flex;
+}
+
+.widget-details > textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 10px;
+    height: 80%;
+}
+
+.widget-edit{
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 900px){
+    .half-widget {
+        width: 100%;
+    }
+}

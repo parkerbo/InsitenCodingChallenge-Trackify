@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    targets = db.relationship("Target", backref='user_targets')
+
 
     @property
     def password(self):
@@ -25,8 +25,11 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        targets = {target.id:target.to_dict() for target in self.user_targets}
+
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'targets': targets
         }
