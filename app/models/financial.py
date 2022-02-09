@@ -19,10 +19,10 @@ class Financial(db.Model):
         return {
             'id': self.id,
             'target_id': self.target_id,
-            'peRatio': self.peRatio,
+            'peRatio': float(self.peRatio) if self.peRatio else None,
             'avgVolume': self.avgVolume,
-            'YTDhigh': self.YTDhigh,
-            'YTDlow': self.YTDlow,
+            'YTDhigh': float(self.YTDhigh) if self.YTDhigh else None,
+            'YTDlow': float(self.YTDlow) if self.YTDlow else None,
             'netProScore' : self.netProScore,
             'created_at' : self.created_at,
             'updated_at': self.updated_at

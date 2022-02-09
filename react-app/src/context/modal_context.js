@@ -8,6 +8,7 @@ export default function ModalProvider({ children }) {
 	const [showEditTargetForm, setShowEditTargetForm] = useState(false);
     const [showEditContactForm, setShowEditContactForm] = useState(false);
     const [showAddContactForm, setShowAddContactForm] = useState(false);
+    const [showEditFinanceForm, setShowEditFinanceForm] = useState(false);
     const [contact, setContact] = useState("");
 
 	return (
@@ -19,6 +20,8 @@ export default function ModalProvider({ children }) {
                 setShowEditContactForm,
                 showAddContactForm,
                 setShowAddContactForm,
+                showEditFinanceForm,
+                setShowEditFinanceForm,
                 contact,
                 setContact
 			}}
