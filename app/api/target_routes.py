@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Target, Contact, Financial, db
-from app.forms import EditTargetForm
+from app.forms import TargetForm
 from operator import itemgetter
 from datetime import datetime
 today = datetime.now()
@@ -39,10 +39,34 @@ def get_target(id):
 
     return result
 
+@target_routes.route('/', methods=['POST'])
+@login_required
+def addTarget():
+    userId = current_user.get_id()
+    form = TargetForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        target = Target(
+            user_id=userId,
+            company_name=form.data['company_name'],
+            description=form.data['description'],
+            location=form.data['location'],
+            status=form.data['status'],
+            phone=form.data['phone'],
+            website=form.data['website'],
+            created_at=today,
+            updated_at=today
+        )
+        db.session.add(target)
+        db.session.commit()
+        db.session.expire_all()
+        return target.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 @target_routes.route('/<int:id>', methods=['POST'])
 @login_required
 def editTarget(id):
-    form = EditTargetForm()
+    form = TargetForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         target = Target.query.get(id)

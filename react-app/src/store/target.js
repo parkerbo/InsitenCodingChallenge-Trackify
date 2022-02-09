@@ -40,8 +40,8 @@ const updateNotes = (notes) => ({
 });
 
 const updateFinance = (finance) => ({
-    type: UPDATE_FINANCE,
-    payload: finance
+	type: UPDATE_FINANCE,
+	payload: finance,
 });
 
 const initialState = null;
@@ -59,6 +59,35 @@ export const getTarget = (targetId) => async (dispatch) => {
 		return data;
 	} else {
 		return response;
+	}
+};
+
+export const addTarget = (target) => async (dispatch) => {
+	const response = await fetch(`/api/targets/`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			company_name: target.company_name,
+			description: target.description,
+			location: target.location,
+			website: target.website,
+			status: target.status,
+			phone: target.phone,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
 	}
 };
 
@@ -156,13 +185,13 @@ export const editFinance = (finance) => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-            id: finance.id,
-            target_id: finance.target_id,
+			id: finance.id,
+			target_id: finance.target_id,
 			avgVolume: finance.avgVolume,
 			peRatio: finance.peRatio,
 			YTDhigh: finance.YTDhigh,
 			YTDlow: finance.YTDlow,
-            netProScore: finance.netProScore,
+			netProScore: finance.netProScore,
 		}),
 	});
 
@@ -232,15 +261,15 @@ export default function reducer(state = initialState, action) {
 		case UPDATE_CONTACT:
 			newState.contacts[action.payload.id] = action.payload;
 			return newState;
-        case DELETE_CONTACT:
-            delete newState.contacts[action.payload.id];
-            return newState;
+		case DELETE_CONTACT:
+			delete newState.contacts[action.payload.id];
+			return newState;
 		case UPDATE_NOTES:
 			newState.target.notes = action.payload;
 			return newState;
-        case UPDATE_FINANCE:
-            newState.financials = action.payload;
-            return newState;
+		case UPDATE_FINANCE:
+			newState.financials = action.payload;
+			return newState;
 		default:
 			return state;
 	}
