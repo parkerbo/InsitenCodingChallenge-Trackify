@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTarget, saveNotes } from "../../store/target";
 import LoadingScreen from "../loading";
+import date from "date-and-time";
 import CompanyLogo from "../company_logo";
 import { IoGlobeSharp } from "react-icons/io5";
 import { MdInfo } from "react-icons/md";
@@ -15,10 +16,15 @@ import EditTargetForm from "./edit_target";
 import Contact from "../contact";
 import EditContactForm from "../contact/edit_contact";
 import AddContact from "../contact/add_contact";
+import EditFinanceForm from "../finance/edit_finance";
 
 const Target = () => {
 	const sessionTarget = useSelector((state) => state.target);
-	const { showEditTargetForm, setShowEditTargetForm, setShowAddContactForm } = useModal();
+	const {
+		setShowEditTargetForm,
+		setShowAddContactForm,
+		setShowEditFinanceForm,
+	} = useModal();
 	const { targetId } = useParams();
 	const didMount = useRef(false);
 	const [loaded, setLoaded] = useState(false);
@@ -29,34 +35,34 @@ const Target = () => {
 	const [financials, setFinancials] = useState("");
 	const [saveState, setSaveState] = useState("");
 
-    // This function retrieves the target info from the redux store and sets the associated variables
-    // It calls the backend only if the sessionTarget hasn't been retrieved, otherwise it looks for changes to the store
-    // and updates accordingly
+	// This function retrieves the target info from the redux store and sets the associated variables
+	// It calls the backend only if the sessionTarget hasn't been retrieved, otherwise it looks for changes to the store
+	// and updates accordingly
 	useEffect(async () => {
 		if (!sessionTarget || targetId != target.id) {
-		const res = await dispatch(getTarget(targetId));
-        setTarget(res.target);
-		setNotes(res.target.notes);
-		setContacts(res.contacts);
-		setFinancials(res.financials);
-        setLoaded(true);
+			const res = await dispatch(getTarget(targetId));
+			setTarget(res.target);
+			setNotes(res.target.notes);
+			setContacts(res.contacts);
+			setFinancials(res.financials);
+			setLoaded(true);
 		} else {
-		setTarget(sessionTarget.target);
-		setNotes(sessionTarget.target.notes);
-		setContacts(sessionTarget.contacts);
-		setFinancials(sessionTarget.financials);
-        setLoaded(true)
-        }
-
+			setTarget(sessionTarget.target);
+			setNotes(sessionTarget.target.notes);
+			setContacts(sessionTarget.contacts);
+			setFinancials(sessionTarget.financials);
+			setLoaded(true);
+		}
 	}, [dispatch, targetId, sessionTarget]);
 
-    // Lines 51 through 74 are for the autosave feature in the notes section
+	// Lines 51 through 74 are for the autosave feature in the notes section
 	const updateNotes = (e) => {
 		setSaveState("Saving...");
 		setNotes(e.target.value);
 	};
 	useEffect(() => {
 		const delayDebounceFn = setTimeout(async () => {
+			// didMount here is to prevent the function from executing on first render
 			if (didMount.current) {
 				const payload = {
 					targetId: targetId,
@@ -90,7 +96,11 @@ const Target = () => {
 					<CompanyLogo name={target.company_name} />
 					<div id="target-options"></div>
 					<div className="target-intro-details">
-						<h1>{target.company_name}</h1>
+						<div className="target-intro-header">
+							<h1>{target.company_name}</h1>
+							<div className={`target-status ${target.status.toLowerCase()}`}>{target.status}</div>
+						</div>
+
 						<h3>{target.location ? target.location : null}</h3>
 						<h5>
 							{target.website ? (
@@ -141,7 +151,12 @@ const Target = () => {
 							</div>
 							<div className="widget-row">
 								<div id="widget-row-title">Last Updated</div>
-								<div id="widget-row-value">{target.updated_at}</div>
+								<div id="widget-row-value">
+									{date.format(
+										new Date(target.updated_at),
+										"MMM DD, 'YY - hh:mm A"
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -171,6 +186,36 @@ const Target = () => {
 								<AiOutlineStock />
 								Financials
 							</h2>
+							<div className="widget-edit">
+								<button onClick={() => setShowEditFinanceForm(true)}>
+									Edit
+								</button>
+								<EditFinanceForm finance={financials} targetId={target.id} />
+							</div>
+						</div>
+						<div className="widget-details">
+							<div className="widget-row">
+								<div id="widget-row-title">Average Volume</div>
+								<div id="widget-row-value">{financials.avgVolume || "---"}</div>
+							</div>
+							<div className="widget-row">
+								<div id="widget-row-title">Price-Earnings Ratio</div>
+								<div id="widget-row-value">{financials.peRatio || "---"}</div>
+							</div>
+							<div className="widget-row">
+								<div id="widget-row-title">52 Week High</div>
+								<div id="widget-row-value">{financials.YTDhigh || "---"}</div>
+							</div>
+							<div className="widget-row">
+								<div id="widget-row-title">52 Week Low</div>
+								<div id="widget-row-value">{financials.YTDlow || "---"}</div>
+							</div>
+							<div className="widget-row">
+								<div id="widget-row-title">Net Promotor Score</div>
+								<div id="widget-row-value">
+									{financials.netProScore || "---"}
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="half-widget">

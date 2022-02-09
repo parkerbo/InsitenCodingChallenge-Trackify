@@ -1,9 +1,13 @@
 const LOAD_TARGET = "target/LOAD_TARGET";
 const UPDATE_TARGET = "target/UPDATE_TARGET";
+
 const UPDATE_NOTES = "target/UPDATE_NOTES";
+
 const ADD_CONTACT = "target/ADD_CONTACT";
 const UPDATE_CONTACT = "target/UPDATE_CONTACT";
 const DELETE_CONTACT = "target/DELETE_CONTACT";
+
+const UPDATE_FINANCE = "target/UPDATE_FINANCE";
 
 const loadTarget = (target) => ({
 	type: LOAD_TARGET,
@@ -33,6 +37,11 @@ const deleteContact = (contact) => ({
 const updateNotes = (notes) => ({
 	type: UPDATE_NOTES,
 	payload: notes,
+});
+
+const updateFinance = (finance) => ({
+    type: UPDATE_FINANCE,
+    payload: finance
 });
 
 const initialState = null;
@@ -140,6 +149,37 @@ export const editContact = (contact) => async (dispatch) => {
 	}
 };
 
+export const editFinance = (finance) => async (dispatch) => {
+	const response = await fetch(`/api/finances/`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+            id: finance.id,
+            target_id: finance.target_id,
+			avgVolume: finance.avgVolume,
+			peRatio: finance.peRatio,
+			YTDhigh: finance.YTDhigh,
+			YTDlow: finance.YTDlow,
+            netProScore: finance.netProScore,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(updateFinance(data));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 export const removeContact = (contactId) => async (dispatch) => {
 	const response = await fetch(`/api/contacts/${contactId}/delete`, {
 		headers: {
@@ -198,6 +238,9 @@ export default function reducer(state = initialState, action) {
 		case UPDATE_NOTES:
 			newState.target.notes = action.payload;
 			return newState;
+        case UPDATE_FINANCE:
+            newState.financials = action.payload;
+            return newState;
 		default:
 			return state;
 	}

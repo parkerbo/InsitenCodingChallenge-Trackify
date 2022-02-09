@@ -6,6 +6,29 @@
     padding: 25px 10% 0px 10%;
 
 }
+.target-intro-header{
+    display: flex;
+    align-items: center;
+}
+.target-status{
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    font-size: 1.2em;
+    margin-bottom: -5px;
+}
+.researching{
+    background-color: rgb(224, 225, 225);
+}
+.pending{
+    background-color: #fcdf69fe ;
+}
+.approved{
+    background-color: #00D647;
+}
+.declined{
+    background-color: #FF3D57;
+}
 .target-body{
     background-color: #F3F2EE;
     min-height: 100%;
@@ -61,7 +84,7 @@
     background-color: white;
     border-radius: 10px;
     margin-bottom: 20px;
-    height: 300px;
+    height: 320px;
     display: flex;
     flex-direction: column;
 }
@@ -81,7 +104,8 @@
 
 .widget-details{
     padding: 10px 20px;
-    min-height: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
     overflow-y:scroll;
 }
 
@@ -119,5 +143,9 @@
 @media only screen and (max-width: 900px){
     .half-widget {
         width: 100%;
+    }
+    .target-intro-header{
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
