@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, ValidationError, Optional, Email
+from wtforms.validators import DataRequired, ValidationError, Optional
 
 def check_phone(form, field):
     # Checking if valid phone
@@ -15,5 +15,5 @@ def check_phone(form, field):
 class ContactForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     title = StringField('title', validators=[Optional()])
-    email = StringField('email',validators=[Optional(), Email()])
+    email = StringField('email',validators=[Optional()])
     phone = StringField('phone', validators=[Optional(), check_phone])
