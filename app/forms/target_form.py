@@ -12,7 +12,7 @@ def check_phone(form, field):
 
 
 
-class EditTargetForm(FlaskForm):
+class TargetForm(FlaskForm):
     company_name = StringField(
         'company_name', validators=[DataRequired()])
     location = StringField('location', validators=[Optional()])

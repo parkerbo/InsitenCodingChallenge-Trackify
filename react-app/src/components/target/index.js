@@ -230,7 +230,7 @@ const Target = () => {
 							<textarea
 								placeholder="Jot down your notes here..."
 								required
-								value={notes}
+								value={notes || ""}
 								onChange={updateNotes}
 							></textarea>
 						</div>
