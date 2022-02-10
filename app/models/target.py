@@ -16,6 +16,8 @@ class Target(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
     targets = db.relationship("User", backref='user_targets')
+    contacts = db.relationship("Contact", cascade="all, delete, delete-orphan")
+    financials = db.relationship("Financial", cascade="all, delete, delete-orphan")
 
 
     def to_dict(self):

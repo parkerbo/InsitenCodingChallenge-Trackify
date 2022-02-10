@@ -9,15 +9,17 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import TrackifyLogo from "../../assets/images/TrackifyLogo.svg";
 import "./navbar.css";
 import useWindowDimensions from "../WindowHook";
+import { AiFillHome} from "react-icons/ai";
+import {BsFillPlusCircleFill} from 'react-icons/bs'
 
 const NavBar = () => {
 	const { height, width } = useWindowDimensions();
 	const sessionUser = useSelector((state) => state.session.user);
 	const history = useHistory();
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [menu, setMenu] = useState(false);
 
-  const loginDemo = async () => {
+	const loginDemo = async () => {
 		await dispatch(sessionActions.login("demo@trackify.com", "password"));
 	};
 
@@ -55,6 +57,16 @@ const NavBar = () => {
 							<h3 style={{ marginRight: 20 }}>
 								Welcome, {sessionUser.username}
 							</h3>
+							<div id="nav-bar-icon-link" onClick={() => history.push("/home")}>
+								<AiFillHome />
+							</div>
+							<div
+								id="nav-bar-icon-link"
+								onClick={() => history.push("/targets/new")}
+							>
+								<BsFillPlusCircleFill />
+							</div>
+
 							<LogoutButton />
 						</>
 					)}
@@ -106,6 +118,16 @@ const NavBar = () => {
 			)}
 			{width <= 600 && sessionUser && (
 				<div className="nav-bar-links">
+					<div id="nav-bar-icon-link" onClick={() => history.push("/home")}>
+						<AiFillHome />
+					</div>
+					<div
+						id="nav-bar-icon-link"
+						onClick={() => history.push("/targets/new")}
+					>
+						<BsFillPlusCircleFill />
+					</div>
+
 					<LogoutButton />
 				</div>
 			)}

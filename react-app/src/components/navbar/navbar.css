@@ -1,8 +1,4 @@
-@media only screen and (max-width: 600px) {
-	.nav-bar-button {
-		width: 120px !important;
-	}
-}
+
 
 .nav-bar {
 	padding: 0px 60px;
@@ -47,7 +43,28 @@
 	line-height: 1.1em;
 	transition: border 0.1s ease-in-out;
 }
-
+.nav-bar-button-logout{
+	background-color: white;
+	display: inline-flex;
+	border: 1px solid black;
+	color: black;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	width: 70px;
+	padding: 0 1em;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 0.4rem;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.1em;
+	transition: border 0.1s ease-in-out;
+}
+.nav-bar-button-logout:hover {
+	border: 2px solid #010133;
+}
 .nav-bar-button:hover {
 	border: 2px solid #010133;
 }
@@ -104,4 +121,25 @@
 
 #nav-bar-menu-items button {
 	margin-bottom: 10px;
+}
+#nav-bar-icon-link{
+	color:#666666;
+	font-size: 30px;
+	padding: 10px 5px;
+	cursor: pointer;
+}
+#nav-bar-icon-link svg{
+	margin-bottom: -5px;
+}
+#nav-bar-icon-link:hover{
+	color: black;
+}
+
+@media only screen and (max-width: 600px) {
+	.nav-bar-button {
+		width: 120px !important;
+	}
+	.nav-bar{
+		padding: 0 10px;
+	}
 }

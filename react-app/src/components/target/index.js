@@ -1,10 +1,11 @@
 import "./target.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTarget, saveNotes } from "../../store/target";
-import LoadingScreen from "../loading";
 import date from "date-and-time";
+import { removeTarget } from "../../store/target";
+
 import CompanyLogo from "../company_logo";
 import { IoGlobeSharp } from "react-icons/io5";
 import { MdInfo } from "react-icons/md";
@@ -12,6 +13,7 @@ import { RiContactsBookFill } from "react-icons/ri";
 import { AiOutlineStock } from "react-icons/ai";
 import { HiPencilAlt } from "react-icons/hi";
 import { useModal } from "../../context/modal_context";
+
 import EditTargetForm from "./edit_target";
 import Contact from "../contact";
 import EditContactForm from "../contact/edit_contact";
@@ -29,6 +31,8 @@ const Target = () => {
 	const didMount = useRef(false);
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
+	const history = useHistory();
+
 	const [target, setTarget] = useState("");
 	const [notes, setNotes] = useState("");
 	const [contacts, setContacts] = useState("");
@@ -54,6 +58,12 @@ const Target = () => {
 			setLoaded(true);
 		}
 	}, [dispatch, targetId, sessionTarget]);
+
+	const onDelete = async (e) => {
+		e.preventDefault();
+		await dispatch(removeTarget(target.id));
+		history.push('/home');
+	};
 
 	// Lines 51 through 74 are for the autosave feature in the notes section
 	const updateNotes = (e) => {
@@ -84,9 +94,6 @@ const Target = () => {
 
 	if (!loaded) {
 		return null;
-		// return (
-		//     <LoadingScreen />
-		// )
 	}
 	return (
 		<div className="target-body">
@@ -94,11 +101,15 @@ const Target = () => {
 			<div className="target-main">
 				<div className="target-main-intro">
 					<CompanyLogo name={target.company_name} />
-					<div id="target-options"></div>
 					<div className="target-intro-details">
 						<div className="target-intro-header">
 							<h1>{target.company_name}</h1>
-							<div className={`target-status ${target.status.toLowerCase()}`}>{target.status}</div>
+							<div className={`target-status ${target.status.toLowerCase()}`}>
+								{target.status}
+							</div>
+							<div id="target-delete">
+								<button onClick={onDelete}>Delete</button>
+							</div>
 						</div>
 
 						<h3>{target.location ? target.location : null}</h3>
@@ -123,7 +134,7 @@ const Target = () => {
 								Company Info
 							</h2>
 							<div className="widget-edit">
-								<button onClick={() => setShowEditTargetForm(true)}>
+								<button id="edit-button" onClick={() => setShowEditTargetForm(true)}>
 									Edit
 								</button>
 							</div>
@@ -167,8 +178,8 @@ const Target = () => {
 								Contacts
 							</h2>
 							<div className="widget-edit">
-								<button onClick={() => setShowAddContactForm(true)}>
-									Add New Contact
+								<button id="edit-button" onClick={() => setShowAddContactForm(true)}>
+									Add Contact
 								</button>
 							</div>
 							<AddContact targetId={target.id} />
@@ -187,7 +198,7 @@ const Target = () => {
 								Financials
 							</h2>
 							<div className="widget-edit">
-								<button onClick={() => setShowEditFinanceForm(true)}>
+								<button id="edit-button" onClick={() => setShowEditFinanceForm(true)}>
 									Edit
 								</button>
 								<EditFinanceForm finance={financials} targetId={target.id} />

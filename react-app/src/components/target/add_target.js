@@ -11,7 +11,7 @@ const AddTarget = () => {
 	const [description, setDescription] = useState("");
 	const [phone, setPhone] = useState("");
 	const [website, setWebsite] = useState("");
-	const [status, setStatus] = useState("");
+	const [status, setStatus] = useState("Researching");
     const dispatch = useDispatch();
     const history = useHistory();
 

@@ -1,3 +1,5 @@
+import { deleteTarget } from "./session";
+
 const LOAD_TARGET = "target/LOAD_TARGET";
 const UPDATE_TARGET = "target/UPDATE_TARGET";
 
@@ -110,6 +112,27 @@ export const editTarget = (target) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(updateTarget(data));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
+export const removeTarget = (targetId) => async (dispatch) => {
+	const response = await fetch(`/api/targets/${targetId}/delete`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteTarget(data));
 		return null;
 	} else if (response.status < 500) {
 		const data = await response.json();

@@ -92,3 +92,16 @@ def updateNotes(id):
         return "Notes updated successfully"
     else:
         return {'Error':'Target does not exist'}, 400
+
+
+@target_routes.route('/<int:id>/delete')
+@login_required
+def delete_target(id):
+    target = Target.query.get(id)
+    try:
+        db.session.delete(target)
+        db.session.commit()
+        return target.to_dict()
+    except AssertionError as message:
+        print(str(message))
+        return jsonify({"error": str(message)}), 400

@@ -15,8 +15,10 @@
 }
 .modal-main{
     position: absolute;
+    padding: 10px 20px;
     top: 100px;
-    width: 560px;
+    min-width: 350px;
+    max-width: 560px;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -26,10 +28,10 @@
     color:black;
 }
 .modal-title{
-    font-family: "Montserrat-Bold";
+    font-family: "Campton";
     font-size: 20px;
     border-bottom: 1px solid #ECEAE9;
-    padding: 20px;
+    padding: 10px;
 }
 .modal-content{
 }
@@ -44,7 +46,7 @@
     resize: none;
     font-size: 15px;
     padding: 5px;
-    height: 200px;
+    height: 50px;
 }
 #modal-label{
     color: #6D6E6F;

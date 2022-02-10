@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useModal } from "../../context/modal_context"
 import { useDispatch } from "react-redux"
 import { editTarget } from "../../store/target"
+import { updateTargetToSession } from "../../store/session"
 
 const EditTargetForm = ({target}) => {
     const {showEditTargetForm, setShowEditTargetForm} = useModal();
@@ -32,6 +33,7 @@ const EditTargetForm = ({target}) => {
 				if (data) {
 					setErrors(data);
 				} else {
+					await dispatch(updateTargetToSession(newTarget));
                     setShowEditTargetForm(false)
                 }
 

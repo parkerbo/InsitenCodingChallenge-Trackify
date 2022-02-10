@@ -5,7 +5,7 @@ class Financial(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     target_id = db.Column(db.Integer, db.ForeignKey("targets.id"), nullable=False)
-    peRatio = db.Column(db.Numeric(4,2))
+    peRatio = db.Column(db.Numeric(8,2))
     avgVolume = db.Column(db.Integer)
     YTDhigh = db.Column(db.Numeric(8,2))
     YTDlow = db.Column(db.Numeric(8,2))
@@ -13,7 +13,7 @@ class Financial(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
-    financials = db.relationship("Target", backref='target_financials')
+    financials = db.relationship("Target", back_populates='financials')
 
     def to_dict(self):
         return {
