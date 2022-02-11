@@ -1,0 +1,49 @@
+.add-target-form-main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#add-target-header {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+    font-family: "Campton";
+    font-size: 32px;
+}
+.add-target-form-card {
+	width: 400px;
+	min-height: 400px;
+	margin-top: 20px;
+	box-shadow: 0 3px 8px rgb(0 0 0 / 30%);
+	display: flex;
+	padding: 15px 30px 15px 30px;
+	flex-direction: column;
+}
+.add-target-form-card form div {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+.add-target-form-card form div input {
+	height: 35px;
+}
+
+#add-target-form-button {
+    cursor: pointer;
+	margin-top: 10px;
+	background-image: linear-gradient(90deg, #010133, #0f1048);
+	font-size: 1.2em;
+	width: 75%;
+	height: 40px;
+	border-radius: 5px;
+	border: 1px transparent;
+	color: #fff;
+}
+#add-target-form-button:hover {
+	background-image: linear-gradient(90deg, #18187e, #1d1f98);
+}
+#add-target-info{
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 10px;
+}

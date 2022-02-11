@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useModal } from "../../context/modal_context";
 
 const Contact = ({ contact }) => {
-    const { showEditContactForm, setShowEditContactForm, setContact } = useModal();
+    const { setShowEditContactForm, setContact } = useModal();
 	const [showDetails, setShowDetails] = useState(false);
 
 	return (

@@ -48,7 +48,7 @@ const NavBar = () => {
 								Sign Up
 							</button>
 							<button id="nav-bar-try" onClick={loginDemo}>
-								Give it a try
+								Demo Login
 							</button>
 						</>
 					)}
@@ -83,7 +83,7 @@ const NavBar = () => {
 							style={{ marginRight: 10 }}
 							onClick={loginDemo}
 						>
-							Give it a try
+							Demo Login
 						</button>
 					)}
 

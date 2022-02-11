@@ -49,6 +49,7 @@ const EditContactForm = () => {
 		if (data) {
 			setErrors(data);
 		} else {
+			setShowDelete(false)
 			setShowEditContactForm(false);
 		}
 	};

@@ -1,0 +1,42 @@
+.auth-form-main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#trackify-logo {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 25px;
+}
+.auth-form-card {
+	width: 400px;
+	min-height: 400px;
+	margin-top: 70px;
+	box-shadow: 0 3px 8px rgb(0 0 0 / 30%);
+	display: flex;
+	padding: 30px;
+	flex-direction: column;
+}
+.auth-form-card form div {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+.auth-form-card form div input {
+	height: 35px;
+}
+
+#auth-form-button {
+    cursor: pointer;
+	margin-top: 50px;
+	background-image: linear-gradient(90deg, #010133, #0f1048);
+	font-size: 1.2em;
+	width: 75%;
+	height: 40px;
+	border-radius: 5px;
+	border: 1px transparent;
+	color: #fff;
+}
+#auth-form-button:hover {
+	background-image: linear-gradient(90deg, #18187e, #1d1f98);
+}

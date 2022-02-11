@@ -239,7 +239,7 @@ const Target = () => {
 								<div id="widget-row-value">{financials.YTDlow || "---"}</div>
 							</div>
 							<div className="widget-row">
-								<div id="widget-row-title">Net Promotor Score</div>
+								<div id="widget-row-title">Net Promoter Score</div>
 								<div id="widget-row-value">
 									{financials.netProScore || "---"}
 								</div>

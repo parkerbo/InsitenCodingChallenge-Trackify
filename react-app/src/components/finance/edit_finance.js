@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useModal } from "../../context/modal_context";
 import { useDispatch } from "react-redux";
 import { editFinance } from "../../store/target";
-import { HiTicket } from "react-icons/hi";
 
 const EditFinanceForm = ({ finance, targetId }) => {
 	const { showEditFinanceForm, setShowEditFinanceForm } = useModal();
