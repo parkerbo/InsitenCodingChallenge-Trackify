@@ -1,6 +1,7 @@
 # Insiten Coding Challenge - Trackify
 
 *This is a repo for a coding challenge assigned by Insiten.*
+* Check it out [here](https://trackify-insiten.herokuapp.com/)
 
 ## It is recommended you use the 'Demo Login' button to use the site if you want to have pre-seeded data available.
 
