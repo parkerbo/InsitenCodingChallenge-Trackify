@@ -28,4 +28,4 @@ Python | Flask | SQLAlchemy
 Users can create a target company and update its contact info and financial information.
 
 ## View Targets
-Users can view targets and edit their information, including contact info and financial data. If the company is publicly traded, they can autofull thier company data with the 'Autofill' feature.
+Users can view targets and edit their information, including contact info and financial data. If the company is publicly traded, they can autofull thier company data with the 'Autofill' feature. There is also a notes feature to autosave notes on a target company.
