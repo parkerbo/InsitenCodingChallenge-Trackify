@@ -169,6 +169,38 @@ margin-left: auto;
     background-color: #004182;
 }
 
+#target-delete button{
+    color: #666666;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 16px;
+    width: 100px;
+    height: 32px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #666666;
+}
+#target-delete button:hover{
+    background-color: #EBEBEB;
+    color: #5E5E5E;
+    border: 2px solid #5E5E5E;
+
+}
+#target-delete button span{
+    margin-left: 5px;
+}
+
+#empty-contacts{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 40px;
+}
+
 @media only screen and (max-width: 900px){
     .half-widget {
         width: 100%;

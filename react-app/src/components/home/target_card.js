@@ -2,6 +2,7 @@ import "./target_card.css";
 import { useHistory } from "react-router-dom";
 const TargetCard = ({ target }) => {
 	const history = useHistory();
+
 	return (
 		<div
 			className="target-card"

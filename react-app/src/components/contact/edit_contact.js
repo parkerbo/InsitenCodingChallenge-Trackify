@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { editContact, removeContact } from "../../store/target";
 
 const EditContactForm = () => {
-	const { showEditContactForm, setShowEditContactForm, contact, setContact } =
+	const { showEditContactForm, setShowEditContactForm, contact } =
 		useModal();
 	const [errors, setErrors] = useState([]);
 	const [showDelete, setShowDelete] = useState(false);
@@ -82,14 +82,18 @@ const EditContactForm = () => {
 			}}
 			show={showEditContactForm}
 		>
-			<form onSubmit={onEdit}>
-				<div>
+			{errors.length > 0 && (
+				<div className="form-errors">
 					{errors.map((error, ind) => (
 						<div key={ind}>{error}</div>
 					))}
 				</div>
+			)}
+			<form id="modal-form" onSubmit={onEdit}>
 				<div>
-					<label>Name</label>
+					<label>
+						Name <span id="form-required">(required)</span>
+					</label>
 					<input
 						type="text"
 						name="name"
@@ -126,19 +130,33 @@ const EditContactForm = () => {
 					></input>
 				</div>
 
-				<button type="submit">Edit Contact</button>
+				<button type="submit" id="form-submit-button">
+					Edit Contact
+				</button>
 				{showDelete ? (
 					<div id="contact-delete-check">
 						<p>Delete {name}?</p>
-						<button
-							onClick={onDelete}
-						>
-							Yes
-						</button>
-						<button onClick={() => setShowDelete(false)}>No</button>
+						<div id="contact-delete-options">
+							<button id="form-submit-button-delete" onClick={onDelete}>
+								Yes
+							</button>
+							<button
+								style={{ marginLeft: 10 }}
+								onClick={() => setShowDelete(false)}
+								id="form-submit-button"
+							>
+								No
+							</button>
+						</div>
 					</div>
 				) : (
-					<button onClick={() => setShowDelete(true)}>Delete Contact</button>
+					<button
+						style={{ marginLeft: 10, backgroundColor: "#666666" }}
+						id="form-submit-button-delete"
+						onClick={() => setShowDelete(true)}
+					>
+						Delete Contact
+					</button>
 				)}
 			</form>
 		</Modal>

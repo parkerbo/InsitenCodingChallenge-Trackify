@@ -13,6 +13,7 @@ const Contact = ({ contact }) => {
 				<div id="contact-row-value">{contact.title}</div>
 				<div className="contact-options">
 					<button
+						id="contact-button"
 						onClick={(e) => {
 							e.stopPropagation();
 							setContact(contact);
@@ -21,7 +22,7 @@ const Contact = ({ contact }) => {
 					>
 						Edit
 					</button>
-					<button>Details</button>
+					<button id='contact-button'>Details</button>
 				</div>
 			</div>
 			{showDetails && (
@@ -33,8 +34,11 @@ const Contact = ({ contact }) => {
 					<div className="widget-row">
 						<div id="widget-row-title">Email</div>
 						<div id="widget-row-value">
-							{contact.email ? (<a href={`mailto:${contact.email}`}>{contact.email}</a>): "---"}
-
+							{contact.email ? (
+								<a href={`mailto:${contact.email}`}>{contact.email}</a>
+							) : (
+								"---"
+							)}
 						</div>
 					</div>
 				</div>

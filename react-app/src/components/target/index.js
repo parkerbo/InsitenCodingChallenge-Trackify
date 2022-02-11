@@ -9,8 +9,9 @@ import { removeTarget } from "../../store/target";
 import CompanyLogo from "../company_logo";
 import { IoGlobeSharp } from "react-icons/io5";
 import { MdInfo } from "react-icons/md";
-import { RiContactsBookFill } from "react-icons/ri";
+import { RiContactsBookFill, RiContactsLine } from "react-icons/ri";
 import { AiOutlineStock } from "react-icons/ai";
+import {FaTrashAlt} from 'react-icons/fa'
 import { HiPencilAlt } from "react-icons/hi";
 import { useModal } from "../../context/modal_context";
 
@@ -62,7 +63,7 @@ const Target = () => {
 	const onDelete = async (e) => {
 		e.preventDefault();
 		await dispatch(removeTarget(target.id));
-		history.push('/home');
+		history.push("/home");
 	};
 
 	// Lines 51 through 74 are for the autosave feature in the notes section
@@ -108,7 +109,9 @@ const Target = () => {
 								{target.status}
 							</div>
 							<div id="target-delete">
-								<button onClick={onDelete}>Delete</button>
+								<button onClick={onDelete}>
+									<FaTrashAlt />
+									<span>Delete</span></button>
 							</div>
 						</div>
 
@@ -117,7 +120,7 @@ const Target = () => {
 							{target.website ? (
 								<>
 									<IoGlobeSharp size="1.3em" />
-									<a target="_blank" href={target.website}>
+									<a target="_blank" rel="noreferrer" href={target.website}>
 										{target.website}
 									</a>
 								</>
@@ -134,7 +137,10 @@ const Target = () => {
 								Company Info
 							</h2>
 							<div className="widget-edit">
-								<button id="edit-button" onClick={() => setShowEditTargetForm(true)}>
+								<button
+									id="edit-button"
+									onClick={() => setShowEditTargetForm(true)}
+								>
 									Edit
 								</button>
 							</div>
@@ -178,7 +184,10 @@ const Target = () => {
 								Contacts
 							</h2>
 							<div className="widget-edit">
-								<button id="edit-button" onClick={() => setShowAddContactForm(true)}>
+								<button
+									id="edit-button"
+									onClick={() => setShowAddContactForm(true)}
+								>
 									Add Contact
 								</button>
 							</div>
@@ -186,6 +195,11 @@ const Target = () => {
 						</div>
 						<div className="contact-widget-details">
 							<EditContactForm />
+							{!Object.keys(contacts).length && (
+								<div id="empty-contacts">
+									<RiContactsLine size="7em" />
+								</div>
+							)}
 							{Object.keys(contacts).map((key) => (
 								<Contact key={contacts[key].id} contact={contacts[key]} />
 							))}
@@ -198,7 +212,10 @@ const Target = () => {
 								Financials
 							</h2>
 							<div className="widget-edit">
-								<button id="edit-button" onClick={() => setShowEditFinanceForm(true)}>
+								<button
+									id="edit-button"
+									onClick={() => setShowEditFinanceForm(true)}
+								>
 									Edit
 								</button>
 								<EditFinanceForm finance={financials} targetId={target.id} />
@@ -240,7 +257,6 @@ const Target = () => {
 						<div className="widget-details">
 							<textarea
 								placeholder="Jot down your notes here..."
-								required
 								value={notes || ""}
 								onChange={updateNotes}
 							></textarea>

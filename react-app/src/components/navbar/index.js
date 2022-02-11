@@ -62,9 +62,11 @@ const NavBar = () => {
 							</div>
 							<div
 								id="nav-bar-icon-link"
+								className="add-new-target"
 								onClick={() => history.push("/targets/new")}
 							>
-								<BsFillPlusCircleFill />
+								<span className="add-new-target-tooltip">New Target</span>
+								<BsFillPlusCircleFill size="0.9em" />
 							</div>
 
 							<LogoutButton />
@@ -123,9 +125,11 @@ const NavBar = () => {
 					</div>
 					<div
 						id="nav-bar-icon-link"
+						className="add-new-target"
 						onClick={() => history.push("/targets/new")}
 					>
-						<BsFillPlusCircleFill />
+						<span className="add-new-target-tooltip">New Target</span>
+						<BsFillPlusCircleFill  />
 					</div>
 
 					<LogoutButton />

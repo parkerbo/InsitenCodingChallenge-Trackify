@@ -1,8 +1,10 @@
+import "./edit_finance.css"
 import Modal from "../modal";
 import { useState, useEffect } from "react";
 import { useModal } from "../../context/modal_context";
 import { useDispatch } from "react-redux";
 import { editFinance } from "../../store/target";
+import { HiTicket } from "react-icons/hi";
 
 const EditFinanceForm = ({ finance, targetId }) => {
 	const { showEditFinanceForm, setShowEditFinanceForm } = useModal();
@@ -37,6 +39,7 @@ const EditFinanceForm = ({ finance, targetId }) => {
 		if (data) {
 			setErrors(data);
 		} else {
+			setErrors([])
 			setShowEditFinanceForm(false);
 		}
 	};
@@ -54,6 +57,7 @@ const EditFinanceForm = ({ finance, targetId }) => {
 		});
 		if (response.ok) {
 			const data = await response.json();
+			setErrors([])
 			setAvgVolume(data.avgVolume);
             setPeRatio(data.peRatio);
             setYTDhigh(data.YTDhigh);
@@ -64,7 +68,7 @@ const EditFinanceForm = ({ finance, targetId }) => {
 				setErrors(data.errors);
 			}
 		} else {
-			setErrors( ["An error occurred. Please try again."]);
+			setErrors( ["Unknown symbol. Please try again."]);
 		}
 	};
 
@@ -99,28 +103,32 @@ const EditFinanceForm = ({ finance, targetId }) => {
 				setYTDlow(finance.YTDlow);
 				setNetProScore(finance.netProScore);
 				setShowEditFinanceForm(false);
+				setTicker("")
 			}}
 			show={showEditFinanceForm}
 		>
-			<div>
-				<p>
-					If the target company is publicly traded, enter the stock ticker
-					symbol to autofill available data.
-				</p>
-				<input
-					type="text"
-					placeholder="Ticker Symbol"
-					value={ticker}
-					onChange={(e) => setTicker(e.target.value.toUpperCase())}
-				/>
-				<button onClick={autofillData}>Autofill</button>
-			</div>
-			<form onSubmit={onEdit}>
-				<div>
+			{errors.length > 0 && (
+				<div className="form-errors">
 					{errors.map((error, ind) => (
 						<div key={ind}>{error}</div>
 					))}
 				</div>
+			)}
+			<div id="autofill-container">
+				<p>
+					INFO: If the target company is publicly traded, enter the stock ticker
+					symbol to autofill available data.
+				</p>
+				<input
+					type="text"
+					style={{width: 115}}
+					placeholder="Ticker Symbol"
+					value={ticker}
+					onChange={(e) => setTicker(e.target.value.toUpperCase())}
+				/>
+				<button onClick={autofillData} disabled={ticker.length === 0}>Autofill</button>
+			</div>
+			<form id="modal-form" onSubmit={onEdit}>
 				<div>
 					<label>Average Volume</label>
 					<input
@@ -170,7 +178,7 @@ const EditFinanceForm = ({ finance, targetId }) => {
 					></input>
 				</div>
 
-				<button type="submit">Update Financials</button>
+				<button type="submit" id="form-submit-button">Update Financials</button>
 			</form>
 		</Modal>
 	);

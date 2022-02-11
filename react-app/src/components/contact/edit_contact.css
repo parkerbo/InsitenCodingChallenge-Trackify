@@ -1,3 +1,7 @@
 #contact-delete-check{
     display: flex;
 }
+#contact-delete-options{
+    display: flex;
+    flex-direction: row !important;
+}

@@ -67,7 +67,9 @@ const AddTarget = () => {
 			</div>
 			<form onSubmit={onCreate}>
 				<div>
-					<label>Company Name</label>
+					<label>
+						Company Name <span id="form-required">(required)</span>
+					</label>
 					<input
 						type="text"
 						name="company_name"
@@ -113,7 +115,9 @@ const AddTarget = () => {
 					></input>
 				</div>
 				<div>
-					<label>Status</label>
+					<label>
+						Status <span id="form-required">(required)</span>
+					</label>
 					<select name="status" onChange={updateStatus} value={status}>
 						<option>Researching</option>
 						<option>Pending Approval</option>

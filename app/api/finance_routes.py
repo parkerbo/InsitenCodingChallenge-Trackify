@@ -22,6 +22,8 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{error}')
     return errorMessages
 
+
+# update financial
 @finance_routes.route('/', methods=['POST'])
 @login_required
 def updateFinances():
@@ -64,7 +66,7 @@ def updateFinances():
                 return jsonify({'error': str(message)}), 400
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-
+# get stock data for edit financial form
 @finance_routes.route('/stock', methods=['POST'])
 @login_required
 def getStock():

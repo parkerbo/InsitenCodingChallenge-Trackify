@@ -18,7 +18,7 @@
     padding: 10px 20px;
     top: 100px;
     min-width: 350px;
-    max-width: 560px;
+    max-width: 350px;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -26,14 +26,20 @@
     border:none;
     border-radius: 12px;
     color:black;
+    font-family: "Campton";
 }
 .modal-title{
     font-family: "Campton";
     font-size: 20px;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid #ECEAE9;
     padding: 10px;
 }
 .modal-content{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
 }
 .modal-content input{
     width: 100%;
@@ -43,10 +49,9 @@
 }
 .modal-content textarea {
     width: 100%;
-    resize: none;
     font-size: 15px;
     padding: 5px;
-    height: 50px;
+    height: 100px;
 }
 #modal-label{
     color: #6D6E6F;
@@ -104,4 +109,85 @@
  #modal-button-cancel:hover{
     background-color: #F9F8F8;
     border-color: #AEABAC;
+}
+#modal-form div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+#form-select{
+    flex-direction: row !important;
+}
+
+#form-select select{
+    margin-left: auto;
+}
+
+.form-errors{
+    background-color: #FFEEED;
+    color: #D05E62;
+    padding: 10px;
+}
+#form-submit-button{
+    height: 32px;
+	cursor: pointer;
+	display: inline-flex;
+    line-height: 15px;
+	align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+	justify-content: center;
+	background-color: #0B65C2;
+	border:none;
+	border-radius: 10px;
+	color: white;
+	vertical-align: center;
+	font-size: 15px;
+	font-family: "Campton", sans-serif;
+}
+#form-submit-button:hover{
+    background-color: #004182;
+}
+
+#modal-close-button{
+    margin-left: auto;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+
+#modal-close-button:hover{
+    background-color: #EBEBEB;
+    border-radius: 25px;
+}
+#modal-close-button svg{
+    margin: 0 !important;
+}
+
+#form-required{
+    color:#666666;
+}
+#form-submit-button-delete{
+    height: 32px;
+	cursor: pointer;
+	display: inline-flex;
+    line-height: 15px;
+	align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+	justify-content: center;
+	background-color: #666666;
+	border:none;
+	border-radius: 10px;
+	color: white;
+	vertical-align: center;
+	font-size: 15px;
+	font-family: "Campton", sans-serif;
+}
+#form-submit-button-delete:hover{
+    background-color: #d7d3d3;
+    color:black;
 }

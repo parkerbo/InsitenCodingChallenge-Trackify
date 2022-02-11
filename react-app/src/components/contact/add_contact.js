@@ -42,6 +42,10 @@ const AddContact = ({ targetId }) => {
 		if (data) {
 			setErrors(data);
 		} else {
+			setName("")
+			setTitle("")
+			setPhone("")
+			setEmail("")
 			setShowAddContactForm(false);
 		}
 	};
@@ -59,14 +63,14 @@ const AddContact = ({ targetId }) => {
 			}}
 			show={showAddContactForm}
 		>
-			<form onSubmit={onAdd}>
+			<form id="modal-form" onSubmit={onAdd}>
 				<div>
 					{errors.map((error, ind) => (
 						<div key={ind}>{error}</div>
 					))}
 				</div>
 				<div>
-					<label>Name</label>
+					<label>Name <span id="form-required">(required)</span></label>
 					<input
 						type="text"
 						name="name"
@@ -103,7 +107,7 @@ const AddContact = ({ targetId }) => {
 					></input>
 				</div>
 
-				<button type="submit">Add Contact</button>
+				<button type="submit" id="form-submit-button">Add Contact</button>
 			</form>
 		</Modal>
 	);

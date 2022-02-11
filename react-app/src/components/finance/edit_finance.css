@@ -1,0 +1,22 @@
+#autofill-container{
+    color:#686868;
+    margin-bottom: 20px;
+}
+
+
+#autofill-container button{
+    background-color: black;
+    color: white;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+#autofill-container button:hover{
+    background-color: rgb(85, 85, 85);
+}
+#autofill-container button:disabled{
+    background-color: #686868;
+    cursor: default;
+}

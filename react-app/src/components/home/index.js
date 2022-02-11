@@ -9,13 +9,13 @@ const Home = () => {
 	return (
 		<div className="home-main">
 			<h1>Target Companies</h1>
-				<div className="targets-list">
-					{targets &&
-						Object.keys(targets).map((key) => (
-							<TargetCard key={targets[key].id} target={targets[key]} />
-						))}
-				</div>
+			<div className="targets-list">
+				{targets &&
+					Object.keys(targets).map((key) => (
+						<TargetCard key={targets[key].id} target={targets[key]} />
+					))}
 			</div>
+		</div>
 	);
 };
 
